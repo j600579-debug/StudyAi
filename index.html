@@ -715,4 +715,58 @@
   async function askQuestion() {
     if (isLoading) return;
     const input = document.getElementById('questionInput');
- 
+    const question = input.value.trim();
+    if (!question) return;
+
+    isLoading = true;
+    document.getElementById('sendBtn').disabled = true;
+    input.value = '';
+    input.style.height = 'auto';
+
+    addMessage(question, 'user');
+    showTyping();
+
+    const systemPrompt = `நீ StudyAI — ஒரு தமிழ் மாணவர்களுக்கான AI படிப்பு உதவியாளர். 
+தற்போது தேர்வு செய்யப்பட்ட பாடம்: ${selectedSubject}
+
+விதிகள்:
+- மாணவர் Tamil-ல் கேட்டால் Tamil-ல் பதில் சொல்
+- விளக்கங்கள் எளிமையாகவும் தெளிவாகவும் இருக்க வேண்டும்
+- உதாரணங்கள் கொடு
+- கணக்குகளுக்கு step-by-step விளக்கம் கொடு
+- நட்பாக, ஊக்கமாக பேசு
+- பதில்களில் முக்கியமான வார்த்தைகளை **தடிமனாக** (Bold) காட்டு`;
+
+    try {
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: [{
+            parts: [{ text: systemPrompt + "\n\nமாணவர் கேள்வி: " + question }]
+          }]
+        })
+      });
+
+      const data = await response.json();
+      removeTyping();
+
+      if (data.candidates && data.candidates[0].content.parts[0].text) {
+        const answer = data.candidates[0].content.parts[0].text;
+        addMessage(answer, 'ai');
+      } else {
+        addMessage('மன்னிக்கவும், பதில் பெறுவதில் சிக்கல். மீண்டும் முயற்சிக்கவும். 🙏', 'ai');
+      }
+    } catch (err) {
+      removeTyping();
+      addMessage('இணைய இணைப்பில் சிக்கல். சிறிது நேரம் கழித்து முயற்சிக்கவும். 🔄', 'ai');
+      console.error(err);
+    }
+
+    isLoading = false;
+    document.getElementById('sendBtn').disabled = false;
+    input.focus();
+  }
+</script>
+</body>
+</html>
