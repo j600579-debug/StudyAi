@@ -14,6 +14,8 @@
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: 'Nunito', 'Baloo Thambi 2', sans-serif; background: linear-gradient(135deg, #f0f4ff 0%, #e8f8f5 50%, #fef9ee 100%); min-height: 100vh; color: var(--text); }
+  
+  /* HEADER */
   header { background: linear-gradient(135deg, var(--primary) 0%, #0f3460 100%); padding: 0 24px; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
   .header-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 68px; }
   .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
@@ -22,31 +24,48 @@
   .logo-text { font-family: 'Baloo Thambi 2', sans-serif; font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
   .logo-text span { color: var(--gold); }
   .header-badge { background: rgba(245,166,35,0.2); border: 1px solid rgba(245,166,35,0.4); color: var(--gold); padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 700; }
-  .hero { text-align: center; padding: 56px 24px 40px; max-width: 760px; margin: 0 auto; animation: fadeInUp 0.7s ease; }
-  @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* HERO */
+  .hero { text-align: center; padding: 56px 24px 40px; max-width: 760px; margin: 0 auto; }
   .hero h1 { font-family: 'Baloo Thambi 2', sans-serif; font-size: clamp(28px, 5vw, 44px); font-weight: 800; color: var(--primary); margin-bottom: 14px; }
   .hero h1 span { background: linear-gradient(135deg, var(--accent), var(--teal)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+  /* SUBJECT CHIPS */
   .subjects-section { max-width: 900px; margin: 0 auto 28px; padding: 0 20px; text-align: center; }
   .chips { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
-  .chip { padding: 8px 18px; border-radius: 30px; font-size: 14px; font-weight: 700; cursor: pointer; border: 2px solid transparent; transition: all 0.2s ease; font-family: 'Baloo Thambi 2', sans-serif; }
-  .chip.active { box-shadow: 0 6px 18px rgba(0,0,0,0.15); transform: translateY(-2px); background: var(--primary); color: white; }
+  .chip { padding: 8px 18px; border-radius: 30px; font-size: 14px; font-weight: 700; cursor: pointer; border: 2px solid transparent; transition: all 0.2s ease; font-family: 'Baloo Thambi 2', sans-serif; background: #fff; border: 1px solid var(--border); }
+  .chip.active { background: var(--primary); color: white; border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.15); }
+
+  /* CHAT BOX */
   .chat-wrapper { max-width: 860px; margin: 0 auto 40px; padding: 0 20px; }
   .chat-box { background: white; border-radius: 24px; box-shadow: var(--shadow); overflow: hidden; border: 1px solid var(--border); }
   .chat-header { background: linear-gradient(135deg, var(--primary), #0f3460); padding: 16px 24px; display: flex; align-items: center; gap: 12px; }
+  .ai-avatar { width: 38px; height: 38px; background: linear-gradient(135deg, var(--accent), var(--gold)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+  .ai-info h3 { color: white; font-size: 15px; font-weight: 700; }
+
   .messages { height: 380px; overflow-y: auto; padding: 24px; display: flex; flex-direction: column; gap: 16px; scroll-behavior: smooth; }
   .msg { display: flex; gap: 10px; max-width: 88%; }
   .msg.user { flex-direction: row-reverse; align-self: flex-end; }
-  .msg-bubble { padding: 13px 18px; border-radius: 18px; font-size: 15px; line-height: 1.7; }
-  .msg.ai .msg-bubble { background: #f4f6ff; border: 1px solid #e8ebff; }
-  .msg.user .msg-bubble { background: var(--primary); color: white; }
+  .msg-avatar { width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+  .msg.ai .msg-avatar { background: linear-gradient(135deg, var(--accent), var(--gold)); }
+  .msg.user .msg-avatar { background: linear-gradient(135deg, var(--teal), #2980b9); }
+  .msg-bubble { padding: 13px 18px; border-radius: 18px; font-size: 15px; line-height: 1.7; word-wrap: break-word; }
+  .msg.ai .msg-bubble { background: #f4f6ff; color: var(--text); border-bottom-left-radius: 4px; border: 1px solid #e8ebff; }
+  .msg.user .msg-bubble { background: var(--primary); color: white; border-bottom-right-radius: 4px; }
+
+  /* INPUT */
   .chat-input-area { border-top: 1px solid var(--border); padding: 16px 20px; background: #fafbff; }
-  .input-row { display: flex; gap: 10px; }
-  #questionInput { flex: 1; border: 2px solid var(--border); border-radius: 14px; padding: 13px 18px; outline: none; resize: none; }
-  .send-btn { width: 52px; height: 52px; background: var(--accent); border: none; border-radius: 14px; color: white; cursor: pointer; }
-  .typing-indicator { display: flex; gap: 5px; padding: 10px; }
-  .typing-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; animation: typing 1.2s infinite; }
-  @keyframes typing { 0%,100% { opacity: 0.4; } 50% { opacity: 1; transform: translateY(-4px); } }
-  footer { text-align: center; padding: 24px; color: var(--muted); border-top: 1px solid var(--border); }
+  .input-row { display: flex; gap: 10px; align-items: flex-end; }
+  #questionInput { flex: 1; border: 2px solid var(--border); border-radius: 14px; padding: 13px 18px; font-size: 15px; outline: none; resize: none; min-height: 52px; max-height: 120px; }
+  .send-btn { width: 52px; height: 52px; background: var(--accent); border: none; border-radius: 14px; color: white; font-size: 22px; cursor: pointer; transition: all 0.2s ease; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .send-btn:disabled { opacity: 0.5; }
+
+  /* LOADING INDICATOR */
+  .typing-indicator { display: flex; gap: 5px; padding: 10px; background: #f4f6ff; border-radius: 18px; width: fit-content; }
+  .typing-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; animation: typingBounce 1.2s infinite; }
+  @keyframes typingBounce { 0%,60%,100% { transform: translateY(0); opacity: 0.4; } 30% { transform: translateY(-8px); opacity: 1; } }
+
+  footer { text-align: center; padding: 24px; color: var(--muted); border-top: 1px solid var(--border); background: white; font-size: 13px; }
 </style>
 </head>
 <body>
@@ -54,13 +73,13 @@
 <header>
   <div class="header-inner">
     <a class="logo" href="#"><div class="logo-icon">📚</div><div class="logo-text">Study<span>AI</span></div></a>
-    <div class="header-badge">Tamil & English AI</div>
+    <div class="header-badge">🇮🇳 Tamil & English</div>
   </div>
 </header>
 
 <div class="hero">
   <h1>படிப்பு கேள்விகளுக்கு<br><span>உடனடி விடை பெறுங்கள்!</span></h1>
-  <p>கணிதம், அறிவியல், வரலாறு என எதையும் தமிழில் கேட்டுப் தெரிந்துகொள்ளுங்கள்! 🎓</p>
+  <p>எந்த பாடமாக இருந்தாலும் சரி, தமிழில் கேளுங்கள், AI பதில் சொல்லும்! 🎓</p>
 </div>
 
 <div class="subjects-section">
@@ -76,11 +95,13 @@
 <div class="chat-wrapper">
   <div class="chat-box">
     <div class="chat-header">
-      <div style="color:white; font-weight:bold;">StudyAI உதவியாளர் 🤖</div>
+      <div class="ai-avatar">🤖</div>
+      <div class="ai-info"><h3>StudyAI உதவியாளர்</h3></div>
     </div>
     <div class="messages" id="messages">
       <div class="msg ai">
-        <div class="msg-bubble">வணக்கம்! நான் StudyAI. உங்கள் படிப்பு தொடர்பான கேள்விகளைக் கேளுங்கள்.</div>
+        <div class="msg-avatar">🤖</div>
+        <div class="msg-bubble">வணக்கம்! நான் உங்கள் StudyAI. எதைப்பற்றி தெரிந்துகொள்ள வேண்டும்?</div>
       </div>
     </div>
     <div class="chat-input-area">
@@ -93,15 +114,14 @@
 </div>
 
 <footer>
-  <p>© 2026 StudyAI | Made with ❤️ for Students</p>
+  <p>Made with ❤️ for Students | © 2026 StudyAI</p>
 </footer>
 
 <script>
   let selectedSubject = 'கணிதம்';
   let isLoading = false;
 
-  // --- API CONFIG ---
-  // உங்கள் API Key இங்கே பாதுகாப்பாக உள்ளது
+  // --- GOOGLE GEMINI API CONFIG ---
   const API_KEY = "AIzaSyAC-IgeJ2BeJSsEH_ffTYrE9LdPTxKuFT0"; 
   const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
 
@@ -110,6 +130,80 @@
     btn.classList.add('active');
     selectedSubject = subject;
   }
+
+  function addMessage(content, role) {
+    const msgs = document.getElementById('messages');
+    const div = document.createElement('div');
+    div.className = `msg ${role}`;
+    const avatar = role === 'ai' ? '🤖' : '👤';
+    
+    // Convert newlines to <br> and **bold** to <strong> for better display
+    let formattedContent = content
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\n/g, '<br>');
+
+    div.innerHTML = `
+      <div class="msg-avatar">${avatar}</div>
+      <div class="msg-bubble">${formattedContent}</div>
+    `;
+    msgs.appendChild(div);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  async function askQuestion() {
+    if (isLoading) return;
+    const input = document.getElementById('questionInput');
+    const question = input.value.trim();
+    if (!question) return;
+
+    isLoading = true;
+    document.getElementById('sendBtn').disabled = true;
+    input.value = '';
+    addMessage(question, 'user');
+
+    // Show Loading
+    const msgs = document.getElementById('messages');
+    const loader = document.createElement('div');
+    loader.id = 'loader';
+    loader.className = 'msg ai';
+    loader.innerHTML = `<div class="msg-avatar">🤖</div><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>`;
+    msgs.appendChild(loader);
+    msgs.scrollTop = msgs.scrollHeight;
+
+    const systemPrompt = `நீ ஒரு சிறந்த ஆசிரியர். மாணவர் கேட்கும் ${selectedSubject} தொடர்பான கேள்விக்குத் தமிழில் எளிமையாகப் பதில் சொல். தேவையான இடங்களில் பாயிண்டுகளைப் பயன்படுத்து.`;
+
+    try {
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: [{
+            parts: [{ text: systemPrompt + "\n\nகேள்வி: " + question }]
+          }]
+        })
+      });
+
+      const data = await response.json();
+      document.getElementById('loader').remove();
+
+      if (data.candidates && data.candidates[0].content.parts[0].text) {
+        addMessage(data.candidates[0].content.parts[0].text, 'ai');
+      } else {
+        addMessage('மன்னிக்கவும், பதில் சொல்வதில் சிறு சிக்கல். மீண்டும் முயற்சிக்கவும்.', 'ai');
+      }
+    } catch (err) {
+      if(document.getElementById('loader')) document.getElementById('loader').remove();
+      addMessage('API இணைப்பு கிடைக்கவில்லை. உங்கள் API Key அல்லது இணையத்தைச் சரிபார்க்கவும்.', 'ai');
+      console.error(err);
+    }
+
+    isLoading = false;
+    document.getElementById('sendBtn').disabled = false;
+  }
+</script>
+</body>
+</html>
+}
 
   function addMessage(content, role) {
     const msgs = document.getElementById('messages');
